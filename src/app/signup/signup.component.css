@@ -1,0 +1,27 @@
+
+
+
+.k-avatar {
+  margin-left: 80px;
+  font-size: 30px;
+}
+.example {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+padding: 0;
+
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+font-family: 'Jost', sans-serif;
+background: linear-gradient(to bottom, #24290c, #e9e9f0);
+}
+.k-form {
+  width: 240px;
+}
+
+
+
+
+

@@ -1,0 +1,467 @@
+
+
+
+
+<button kendoButton type="button" (click)="excelexport.save()">
+  Export To Excel
+</button>
+
+
+<kendo-excelexport [data]="list" fileName="Employee.xlsx" #excelexport>
+<kendo-excelexport-column field="firstname" title="First Name">
+</kendo-excelexport-column>
+<kendo-excelexport-column field="lastname" title="Last Name">
+</kendo-excelexport-column>
+<kendo-excelexport-column field="gender" title="Gender">
+</kendo-excelexport-column>
+<kendo-excelexport-column field="designation" title="Designation">
+</kendo-excelexport-column>
+<kendo-excelexport-column field="salary" title="Salary">
+</kendo-excelexport-column>
+<kendo-excelexport-column field="email" title="Email">
+</kendo-excelexport-column>
+<kendo-excelexport-column field="city" title="City">
+</kendo-excelexport-column>
+
+</kendo-excelexport>
+
+
+
+
+
+<kendo-grid
+      [kendoGridBinding]="list"
+      [filterable]="true"
+      [pageSize]="10"
+      [pageable]="true"
+
+      [height]="500"
+      (edit)="editHandler($event)"
+      (remove)="removeHandler($event)"
+      
+      
+    >
+
+  
+
+    <ng-template kendoGridToolbarTemplate>
+      <button kendoGridAddCommand   data-bs-toggle="modal" data-bs-target="#exampleModal">Add new</button>
+    </ng-template>
+     <!-- <kendo-grid-column field="employeeid" [width]="140"></kendo-grid-column> -->
+
+      <kendo-grid-column field="firstname" [width]="140"></kendo-grid-column>
+      <kendo-grid-column field="lastname" [width]="100"></kendo-grid-column>
+      <kendo-grid-column field="gender" [width]="100"></kendo-grid-column>
+      <kendo-grid-column field="designation" [width]="130"></kendo-grid-column>
+      <kendo-grid-column field="salary" [width]="120"></kendo-grid-column>
+      <kendo-grid-column field="email" [width]="100"></kendo-grid-column>
+      <kendo-grid-column field="city" [width]="130"></kendo-grid-column>
+  
+      <kendo-grid-command-column title="Actions">
+      <ng-template kendoGridCellTemplate>
+        <!-- <button kendoGridEditCommand [primary]="true" *ngIf="!opened" (click)="AddHandler($event)" (click)="AddData()">Add</button> -->
+
+        <button kendoGridEditCommand [primary]="true" *ngIf="!opened" (click)="editHandler($event)" >Edit</button>
+        <button kendoGridRemoveCommand [look]="'outline'" [primary]="true" (click)="removeHandler($event)">Delete</button>
+      </ng-template>
+    </kendo-grid-command-column>
+    </kendo-grid>
+
+    <kendo-dialog
+      title="Edit details"
+      *ngIf="opened"
+      (close)="close('cancel')"
+      [minWidth]="250"
+      [width]="450"
+    >
+    <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+      <kendo-label [for]="firsname" text="firstname"></kendo-label>
+      <input
+        formControlname="firstname"
+        name="firstname"
+        kendoTextBox
+        #firsname
+        required
+        [(ngModel)]="updateEmployee.firstname" [ngModelOptions]="{standalone: true}"
+      />
+      <kendo-formhint>First Name</kendo-formhint>
+      <kendo-formerror>Error: First Name is required</kendo-formerror>
+    </kendo-formfield>
+
+
+
+    <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+      <kendo-label [for]="lastname" text="lastname"></kendo-label>
+      <input
+        formControlname="lastname"
+        name="lastname"
+        kendoTextBox
+        #lastname
+        required
+        [(ngModel)]="updateEmployee.lastname" [ngModelOptions]="{standalone: true}"
+      />
+      <kendo-formhint>Last Name</kendo-formhint>
+      <kendo-formerror>Error: Last Name is required</kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+      <kendo-label [for]="gender" text="gender"></kendo-label>
+      <input
+        formControlname="gender"
+        name="gender"
+        kendoTextBox
+        #gender
+        required
+        [(ngModel)]="updateEmployee.gender" [ngModelOptions]="{standalone: true}"
+      />
+      <kendo-formhint>Gender</kendo-formhint>
+      <kendo-formerror>Error: Gender is required</kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+      <kendo-label [for]="designation" text="designation"></kendo-label>
+      <input
+        formControlname="designation"
+        name="designation"
+        kendoTextBox
+        #designation
+        required
+        [(ngModel)]="updateEmployee.designation" [ngModelOptions]="{standalone: true}"
+      />
+      <kendo-formhint>Designation</kendo-formhint>
+      <kendo-formerror>Error: Designation is required</kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+      <kendo-label [for]="salary" text="salary"></kendo-label>
+      <input
+        formControlname="salary"
+        name="salary"
+        kendoTextBox
+        #salary
+        required
+        [(ngModel)]="updateEmployee.salary" [ngModelOptions]="{standalone: true}"
+      />
+      <kendo-formhint>Salary</kendo-formhint>
+      <kendo-formerror>Error: Salary is required</kendo-formerror>
+    </kendo-formfield>
+
+
+    <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+      <kendo-label [for]="email" text="email"></kendo-label>
+      <input
+        formControlname="email"
+        name="email"
+        kendoTextBox
+        #email
+        required
+        [(ngModel)]="updateEmployee.email" [ngModelOptions]="{standalone: true}"
+      />
+      <kendo-formhint>Email</kendo-formhint>
+      <kendo-formerror>Error: Email is required</kendo-formerror>
+    </kendo-formfield>
+
+
+    <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+      <kendo-label [for]="city" text="city"></kendo-label>
+      <input
+        formControlname="city"
+        name="city"
+        kendoTextBox
+        #city
+        required
+        [(ngModel)]="updateEmployee.city" [ngModelOptions]="{standalone: true}"
+      />
+      <kendo-formhint>City</kendo-formhint>
+      <kendo-formerror>Error: City is required</kendo-formerror>
+    </kendo-formfield>
+
+
+
+      <kendo-dialog-actions>
+        <button kendoButton (click)="close('no')">Close</button>
+        <button kendoButton (click)="close('yes')" (click)="updateData()" themeColor="primary">
+          Save changes
+        </button> 
+        
+      </kendo-dialog-actions>
+    </kendo-dialog>
+
+
+
+
+    <!-- Dialog for Add -->
+
+    <kendo-dialog
+    title="Add Data"
+    *ngIf="AddDialogOpen"
+    (close)="close('cancel')"
+    [minWidth]="250"
+    [width]="450"
+  >
+  <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+    <kendo-label [for]="firsname" text="firstname"></kendo-label>
+    <input
+      formControlname="firstname"
+      name="firstname"
+      kendoTextBox
+      #firsname
+      required
+      [(ngModel)]="updateEmployee.firstname" [ngModelOptions]="{standalone: true}"
+    />
+    <kendo-formhint>First Name</kendo-formhint>
+    <kendo-formerror>Error: First Name is required</kendo-formerror>
+  </kendo-formfield>
+
+
+
+  <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+    <kendo-label [for]="lastname" text="lastname"></kendo-label>
+    <input
+      formControlname="lastname"
+      name="lastname"
+      kendoTextBox
+      #lastname
+      required
+      [(ngModel)]="updateEmployee.lastname" [ngModelOptions]="{standalone: true}"
+    />
+    <kendo-formhint>Last Name</kendo-formhint>
+    <kendo-formerror>Error: Last Name is required</kendo-formerror>
+  </kendo-formfield>
+
+  <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+    <kendo-label [for]="gender" text="gender"></kendo-label>
+    <input
+      formControlname="gender"
+      name="gender"
+      kendoTextBox
+      #gender
+      required
+      [(ngModel)]="updateEmployee.gender" [ngModelOptions]="{standalone: true}"
+    />
+    <kendo-formhint>Gender</kendo-formhint>
+    <kendo-formerror>Error: Gender is required</kendo-formerror>
+  </kendo-formfield>
+
+  <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+    <kendo-label [for]="designation" text="designation"></kendo-label>
+    <input
+      formControlname="designation"
+      name="designation"
+      kendoTextBox
+      #designation
+      required
+      [(ngModel)]="updateEmployee.designation" [ngModelOptions]="{standalone: true}"
+    />
+    <kendo-formhint>Designation</kendo-formhint>
+    <kendo-formerror>Error: Designation is required</kendo-formerror>
+  </kendo-formfield>
+
+  <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+    <kendo-label [for]="salary" text="salary"></kendo-label>
+    <input
+      formControlname="salary"
+      name="salary"
+      kendoTextBox
+      #salary
+      required
+      [(ngModel)]="updateEmployee.salary" [ngModelOptions]="{standalone: true}"
+    />
+    <kendo-formhint>Salary</kendo-formhint>
+    <kendo-formerror>Error: Salary is required</kendo-formerror>
+  </kendo-formfield>
+
+
+  <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+    <kendo-label [for]="email" text="email"></kendo-label>
+    <input
+      formControlname="email"
+      name="email"
+      kendoTextBox
+      #email
+      required
+      [(ngModel)]="updateEmployee.email" [ngModelOptions]="{standalone: true}"
+    />
+    <kendo-formhint>Email</kendo-formhint>
+    <kendo-formerror>Error: Email is required</kendo-formerror>
+  </kendo-formfield>
+
+
+  <kendo-formfield style="margin-bottom: 10px;" showHints="always" showErrors="initial">
+    <kendo-label [for]="city" text="city"></kendo-label>
+    <input
+      formControlname="city"
+      name="city"
+      kendoTextBox
+      #city
+      required
+      [(ngModel)]="updateEmployee.city" [ngModelOptions]="{standalone: true}"
+    />
+    <kendo-formhint>City</kendo-formhint>
+    <kendo-formerror>Error: City is required</kendo-formerror>
+  </kendo-formfield>
+
+
+
+    <kendo-dialog-actions>
+      <button kendoButton (click)="close('no')">Close</button>
+      <button kendoButton (click)="close('yes')" (click)="updateData()" themeColor="primary">
+
+
+        Save changes
+      </button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+
+  
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="k-form k-form-md" [formGroup]="forms">
+          <fieldset class="k-form-fieldset">
+            <kendo-formfield>
+              <kendo-label [for]="firstname" text="firstname"></kendo-label>
+              <kendo-textbox
+                formControlName="firstname"
+                #firstname
+                required>
+              </kendo-textbox>
+    
+              <kendo-formhint>Your First Name</kendo-formhint>
+              <kendo-formerror>Error: First Name is required</kendo-formerror>
+            </kendo-formfield>
+    
+    
+            <kendo-formfield>
+              <kendo-label [for]="lastname" text="lastname"></kendo-label>
+              <kendo-textbox
+                formControlName="lastname"
+                #lastname
+                required>
+              </kendo-textbox>
+    
+              <kendo-formhint>Your Last Name</kendo-formhint>
+              <kendo-formerror>Error: Last Name  is required</kendo-formerror>
+            </kendo-formfield>
+  
+  
+          <kendo-formfield>
+              <kendo-label [for]="gender" text="gender"></kendo-label>
+              <kendo-textbox
+                formControlName="gender"
+                #gender
+                required>
+              </kendo-textbox>
+    
+              <kendo-formhint>Your Last Name</kendo-formhint>
+              <kendo-formerror>Error: Last Name  is required</kendo-formerror>
+            </kendo-formfield>
+    
+  
+            <kendo-formfield>
+              <kendo-label [for]="designation" text="designation"></kendo-label>
+              <kendo-textbox
+                formControlName="designation"
+                #designation
+                required>
+              </kendo-textbox>
+    
+              <kendo-formhint>Your Last Name</kendo-formhint>
+              <kendo-formerror>Error: Last Name  is required</kendo-formerror>
+            </kendo-formfield>
+  
+            <kendo-formfield>
+              <kendo-label [for]="salary" text="salary"></kendo-label>
+              <kendo-textbox
+                formControlName="salary"
+                #salary
+                required>
+              </kendo-textbox>
+    
+              <kendo-formhint>Your Last Name</kendo-formhint>
+              <kendo-formerror>Error: Last Name  is required</kendo-formerror>
+            </kendo-formfield>
+  
+            <kendo-formfield>
+              <kendo-label [for]="email" text="Email"></kendo-label>
+              <kendo-textbox
+                formControlName="email"
+                #email
+                required>
+              </kendo-textbox>
+    
+              <kendo-formhint>Your Email</kendo-formhint>
+              <kendo-formerror>Error: Email is required</kendo-formerror>
+            </kendo-formfield>
+         
+            <kendo-formfield>
+              <kendo-label [for]="city" text="city"></kendo-label>
+              <kendo-textbox
+                formControlName="city"
+                #city
+                required>
+              </kendo-textbox>
+    
+              <kendo-formhint>Your City</kendo-formhint>
+              <kendo-formerror>Error: City is required</kendo-formerror>
+            </kendo-formfield>
+    
+             
+    
+            
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="AddEmployee()">Add Employee</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="example-config">
+  <label [for]="scaleInput">Document scale:</label>
+  <kendo-numerictextbox
+    #scaleInput
+    [(ngModel)]="scale"
+    [min]="0.1"
+    [max]="5"
+    [step]="0.1"
+    format="N1"
+    [style.width.px]="160"
+  ></kendo-numerictextbox>
+  <button kendoButton (click)="pdf.saveAs('scale.pdf')">
+    Save As PDF...
+  </button>
+</div>
+
+<kendo-pdf-export #pdf paperSize="A4" margin="2cm" [scale]="scale">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis
+    libero, lobortis ac rutrum quis, varius a velit. Donec lacus erat,
+    cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem pharetra
+    accumsan pharetra, mi ligula cursus felis, ac aliquet leo diam eget
+    risus. Integer facilisis, justo cursus venenatis vehicula, massa nisl
+    tempor sem, in ullamcorper neque mauris in orci.
+  </p>
+  <p>
+    Ut orci ligula, varius ac consequat in, rhoncus in dolor. Mauris
+    pulvinar molestie accumsan. Vestibulum ante ipsum primis in faucibus
+    orci luctus et ultrices posuere cubilia Curae; Aenean velit ligula,
+    pharetra quis aliquam sed, scelerisque sed sapien. Class aptent taciti
+    sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+    Aliquam dui mi, vulputate vitae pulvinar ac, condimentum sed eros.
+  </p>
+  
+</kendo-pdf-export>

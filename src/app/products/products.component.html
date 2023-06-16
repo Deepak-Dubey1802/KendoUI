@@ -1,0 +1,10 @@
+<button kendoButton type="button" (click)="excelexport.save()">
+    Export To Excel
+  </button>
+
+  <kendo-excelexport [data]="data" fileName="Products.xlsx" #excelexport>
+    <kendo-excelexport-column field="ProductID" title="Product ID">
+    </kendo-excelexport-column>
+    <kendo-excelexport-column field="ProductName" title="Product Name">
+    </kendo-excelexport-column>
+  </kendo-excelexport>

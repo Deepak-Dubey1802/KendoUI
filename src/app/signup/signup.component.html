@@ -1,0 +1,127 @@
+<body>
+  <div class="example">
+    <form class="k-form k-form-md" [formGroup]="forms">
+      <fieldset class="k-form-fieldset">
+        <legend class="k-form-legend">Sign Up</legend>
+
+        <kendo-avatar
+          initials="S"
+          width="80px"
+          height="80px"
+          shape="circle">
+        </kendo-avatar>
+        <kendo-formfield>
+          <kendo-label [for]="firstname" text="firstname"></kendo-label>
+          <kendo-textbox
+            formControlName="firstname"
+            [clearButton]="true"
+            #firstname
+            required>
+          </kendo-textbox>
+
+          <kendo-formhint>Your First Name</kendo-formhint>
+          <kendo-formerror>Error: First Name is required</kendo-formerror>
+        </kendo-formfield>
+
+
+        <kendo-formfield>
+          <kendo-label [for]="lastname" text="lastname"></kendo-label>
+          <kendo-textbox
+            formControlName="lastname"
+            [clearButton]="true"
+            #lastname
+            required>
+          </kendo-textbox>
+
+          <kendo-formhint>Your Last Name</kendo-formhint>
+          <kendo-formerror>Error: Last Name  is required</kendo-formerror>
+        </kendo-formfield>
+
+
+        <kendo-formfield>
+          <kendo-label [for]="email" text="Email"></kendo-label>
+          <kendo-textbox
+            formControlName="email"
+            [clearButton]="true"
+            #email
+            required>
+          </kendo-textbox>
+
+          <kendo-formhint>Your Email</kendo-formhint>
+          <kendo-formerror>Error: Email is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="password" text="Password"> </kendo-label>
+          <kendo-textbox
+            formControlName="password"
+            #password
+            required
+            [clearButton]="true">
+            <ng-template kendoTextBoxSuffixTemplate>
+              <button
+                kendoButton
+                look="clear"
+                icon="eye"
+                (click)="toggleVisibility()">
+              </button>
+            </ng-template>
+          </kendo-textbox>
+
+          <kendo-formhint>Your password</kendo-formhint>
+          <kendo-formerror>Error: Password is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="addressline" text="addressline"></kendo-label>
+          <kendo-textbox
+            formControlName="addressline"
+            [clearButton]="true"
+            #addressline
+            required>
+          </kendo-textbox>
+
+          <kendo-formhint>Your Address</kendo-formhint>
+          <kendo-formerror>Error: Address is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="city" text="city"></kendo-label>
+          <kendo-textbox
+            formControlName="city"
+            [clearButton]="true"
+            #city
+            required>
+          </kendo-textbox>
+
+          <kendo-formhint>Your City</kendo-formhint>
+          <kendo-formerror>Error: City is required</kendo-formerror>
+        </kendo-formfield>
+
+         <kendo-formfield>
+          <div class="k-checkbox-wrap">
+            <input
+              #loggedin
+              type="checkbox"
+              kendoCheckBox
+              formControlName="loggedin"/>
+
+          </div>
+
+        </kendo-formfield>
+
+        <div class="k-form-buttons">
+          <button kendoButton themeColor="primary" (click)="onAdd()">
+            Sign up
+          </button>
+
+          <button routerLink="/login">Login</button>
+
+        </div>
+      </fieldset>
+    </form>
+
+
+  </div>
+
+  </body>
